@@ -1,13 +1,13 @@
 # HindiNER
 
-## Hindi Audio → Text → NER (CRF) Pipeline
+## Hindi Audio → Text → NER (XLM-RoBERTa) Pipeline
 
-Turn Hindi audio into text and extract named entities using a pre-trained CRF model — all from a single Jupyter notebook.
+Turn Hindi audio into text and extract named entities using a pre-trained XLM-RoBERTa model — all from a single Jupyter notebook.
 
 ## Overview
 This repository contains a self-contained notebook that:
 - Uses an existing transcription file (`final_transcription.txt`) or transcribes uploaded/provided audio
-- Loads your pre-trained CRF model (`hindi_ner_crf_model_epoch.joblib`)
+- Loads your pre-trained XLM-RoBERTa model (`hindi_ner_XLM-RoBERTa_model_epoch.joblib`)
 - Runs NER and displays both token-level tags and structured entities
 
 Core file:
@@ -16,7 +16,7 @@ Core file:
 ## Features
 - Audio upload or path-based transcription (fallback to `final_transcription.txt` if available)
 - Hindi spell-check pass with lightweight common corrections
-- CRF-based NER with inline tagged output and a dataframe of entities
+- XLM-RoBERTa-based NER with inline tagged output and a dataframe of entities
 - Entity counts summary for quick inspection
 
 ## Requirements
@@ -25,7 +25,7 @@ Core file:
 - ffmpeg (required by `pydub` for audio processing)
 
 Python packages (installed automatically in the notebook, but listed here):
-- `pandas`, `numpy`, `joblib`, `sklearn-crfsuite`, `scikit-learn`
+- `pandas`, `numpy`, `joblib`, `sklearn-XLM-RoBERTasuite`, `scikit-learn`
 - `pydub`, `faster-whisper`, `ipywidgets`
 
 ## Windows: Install ffmpeg
@@ -48,7 +48,7 @@ pip install jupyter
 
 Optional: Preinstall the packages used by the notebook cell:
 ```bash
-pip install pandas numpy joblib sklearn-crfsuite scikit-learn pydub faster-whisper ipywidgets
+pip install pandas numpy joblib sklearn-XLM-RoBERTasuite scikit-learn pydub faster-whisper ipywidgets
 ```
 
 Enable widgets in classic Jupyter if required:
@@ -57,8 +57,8 @@ jupyter nbextension enable --py widgetsnbextension
 ```
 
 ## Required Model File
-Place your trained CRF model at the project root:
-- `hindi_ner_crf_model_epoch.joblib`
+Place your trained XLM-RoBERTa model at the project root:
+- `hindi_ner_XLM-RoBERTa_model_epoch.joblib`
 
 The notebook will load it automatically.
 
@@ -88,7 +88,7 @@ If you already have text, save it in UTF-8 as `final_transcription.txt` in the p
 
 ## Troubleshooting
 - "ffmpeg not found": Install ffmpeg and ensure `ffmpeg.exe` is on your PATH (Windows) or install via your package manager (macOS/Linux).
-- No entities detected: Ensure you’re loading the correct CRF model and that the input text is in Hindi; validate that tokens are being generated as expected.
+- No entities detected: Ensure you’re loading the correct XLM-RoBERTa model and that the input text is in Hindi; validate that tokens are being generated as expected.
 - Empty transcription: Check audio quality and try adjusting silence split parameters in the notebook.
 - Widgets don’t render: Enable `ipywidgets` and ensure the nbextension is enabled (see Setup).
 
@@ -96,10 +96,10 @@ If you already have text, save it in UTF-8 as `final_transcription.txt` in the p
 ```
 .
 ├─ Audio_to_NER_Pipeline.ipynb
-├─ hindi_ner_crf_model_epoch.joblib
+├─ hindi_ner_XLM-RoBERTa_model_epoch.joblib
 ├─ final_transcription.txt                   # (created after successful transcription; optional)
 ```
 
 ## Acknowledgements
 - Transcription powered by `faster-whisper`
-- Sequence labeling via `sklearn-crfsuite`
+- Sequence labeling via `sklearn-XLM-RoBERTasuite`
