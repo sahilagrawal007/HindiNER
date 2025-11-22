@@ -2,12 +2,12 @@
 
 ## Hindi Audio → Text → NER (XLM-RoBERTa) Pipeline
 
-Turn Hindi audio into text and extract named entities using a pre-trained XLM-RoBERTa model — all from a single Jupyter notebook.
+Turn Hindi audio into text and extract named entities using a pre-trained XLM-RoBERTa model.
 
 ## Overview
 This repository contains a self-contained notebook that:
 - Uses an existing transcription file (`final_transcription.txt`) or transcribes uploaded/provided audio
-- Loads your pre-trained XLM-RoBERTa model (`hindi_ner_XLM-RoBERTa_model_epoch.joblib`)
+- Load the pre-trained XLM-RoBERTa model fine-tuned on the dataset.
 - Runs NER and displays both token-level tags and structured entities
 
 Core file:
@@ -25,51 +25,17 @@ Core file:
 - ffmpeg (required by `pydub` for audio processing)
 
 Python packages (installed automatically in the notebook, but listed here):
-- `pandas`, `numpy`, `joblib`, `sklearn-XLM-RoBERTasuite`, `scikit-learn`
+- `pandas`, `numpy`, `scikit-learn`
 - `pydub`, `faster-whisper`, `ipywidgets`
 
-## Windows: Install ffmpeg
-The notebook uses `pydub`, which needs ffmpeg.
-1. Download a Windows build from: `https://www.gyan.dev/ffmpeg/builds/`
-2. Extract and add the `bin` folder (containing `ffmpeg.exe`) to your system `PATH`.
-3. Close and reopen your terminal/IDE so PATH changes apply.
-
-## Setup
-You can rely on the notebook’s first cell to install dependencies, or set up a venv:
-
-```bash
-# Create and activate a virtual environment (Windows PowerShell example)
-python -m venv .venv
-.venv\Scripts\Activate.ps1
-
-# Install Jupyter if needed
-pip install jupyter
-```
-
-Optional: Preinstall the packages used by the notebook cell:
-```bash
-pip install pandas numpy joblib sklearn-XLM-RoBERTasuite scikit-learn pydub faster-whisper ipywidgets
-```
-
-Enable widgets in classic Jupyter if required:
-```bash
-jupyter nbextension enable --py widgetsnbextension
-```
-
-## Required Model File
-Place your trained XLM-RoBERTa model at the project root:
-- `hindi_ner_XLM-RoBERTa_model_epoch.joblib`
-
-The notebook will load it automatically.
-
-## Using the Notebook (recommended)
+## Using the Notebook
 1. Launch Jupyter and open `Audio_to_NER_Pipeline.ipynb`:
    ```bash
    jupyter notebook
    ```
 2. Run the first cell to install/import dependencies.
 3. Choose how to provide input text:
-   - Upload an audio file (WAV/MP3/M4A/FLAC/OGG), or
+   - Upload an audio file (WAV/MP3), or
    - Enter a local audio path, or
    - Ensure `final_transcription.txt` exists (the notebook will use it as a fallback)
 4. Click “Transcribe audio” to process input. If an audio file is provided or a path is valid, it will be transcribed with `faster-whisper` and optionally spell-checked.
@@ -90,16 +56,14 @@ If you already have text, save it in UTF-8 as `final_transcription.txt` in the p
 - "ffmpeg not found": Install ffmpeg and ensure `ffmpeg.exe` is on your PATH (Windows) or install via your package manager (macOS/Linux).
 - No entities detected: Ensure you’re loading the correct XLM-RoBERTa model and that the input text is in Hindi; validate that tokens are being generated as expected.
 - Empty transcription: Check audio quality and try adjusting silence split parameters in the notebook.
-- Widgets don’t render: Enable `ipywidgets` and ensure the nbextension is enabled (see Setup).
+- Widgets don’t render: Enable `ipywidgets` and ensure the nbextension is enabled.
 
 ## Repository Structure (typical)
 ```
 .
 ├─ Audio_to_NER_Pipeline.ipynb
-├─ hindi_ner_XLM-RoBERTa_model_epoch.joblib
 ├─ final_transcription.txt                   # (created after successful transcription; optional)
 ```
 
 ## Acknowledgements
 - Transcription powered by `faster-whisper`
-- Sequence labeling via `sklearn-XLM-RoBERTasuite`
